@@ -1,4 +1,8 @@
-Inspired by `AspNetCoreRateLimit` [repo link](https://github.com/stefanprodan/AspNetCoreRateLimit)
+# IpRateLimiter.NET.AltairCA
 
 
-### More Documentation will be added later :D
+IpRateLimiter.NET.AltairCA is an request limiting solution by looking at the client ip address. 
+
+**Inspired by `AspNetCoreRateLimit` [repo link](https://github.com/stefanprodan/AspNetCoreRateLimit)**
+
+
