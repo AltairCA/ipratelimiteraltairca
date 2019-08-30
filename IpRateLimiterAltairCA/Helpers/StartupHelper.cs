@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IpRateLimiterAltairCA.Interface;
+using IpRateLimiter.NET.AltairCA.Interface;
+using IpRateLimiter.NET.AltairCA.Models;
+using IpRateLimiter.NET.AltairCA.Service;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IpRateLimiterAltairCA
+namespace IpRateLimiter.NET.AltairCA.Helpers
 {
     public static class StartupHelper
     {

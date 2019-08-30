@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IpRateLimiterAltairCA
+namespace IpRateLimiter.NET.AltairCA.Models
 {
     internal class StoreModel
     {

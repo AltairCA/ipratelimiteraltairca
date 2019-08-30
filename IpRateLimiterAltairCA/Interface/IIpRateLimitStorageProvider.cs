@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace IpRateLimiterAltairCA.Interface
+namespace IpRateLimiter.NET.AltairCA.Interface
 {
     public interface IIpRateLimitStorageProvider
     {

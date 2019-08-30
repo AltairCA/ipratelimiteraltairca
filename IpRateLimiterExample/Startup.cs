@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IpRateLimiterAltairCA;
-using IpRateLimiterAltairCA.Interface;
+using IpRateLimiter.NET.AltairCA.Helpers;
+using IpRateLimiter.NET.AltairCA.Interface;
+using IpRateLimiter.NET.AltairCA.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace IpRateLimiterAltairCA
+namespace IpRateLimiter.NET.AltairCA.Models
 {
     public class IpRateLimitOptions
     {

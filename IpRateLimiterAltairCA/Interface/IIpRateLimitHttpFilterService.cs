@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using IpRateLimiterAltairCA.Models;
+using IpRateLimiter.NET.AltairCA.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace IpRateLimiterAltairCA.Interface
+namespace IpRateLimiter.NET.AltairCA.Interface
 {
     public interface IIpRateLimitHttpFilterService
     {

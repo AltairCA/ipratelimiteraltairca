@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace IpRateLimiterAltairCA.Models
+namespace IpRateLimiter.NET.AltairCA.Models
 {
     public class IpRateLimitServiceResponse
     {

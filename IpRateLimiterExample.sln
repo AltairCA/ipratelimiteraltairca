@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpRateLimiterExample", "IpRateLimiterExample\IpRateLimiterExample.csproj", "{54B8AD65-0F59-44A3-8D5F-4101CD6A2944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpRateLimiterAltairCA", "IpRateLimiterAltairCA\IpRateLimiterAltairCA.csproj", "{65271E97-A61A-4799-A340-C1C5CF1EA944}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpRateLimiter.NET.AltairCA", "IpRateLimiterAltairCA\IpRateLimiter.NET.AltairCA.csproj", "{65271E97-A61A-4799-A340-C1C5CF1EA944}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
