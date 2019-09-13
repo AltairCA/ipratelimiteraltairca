@@ -1,0 +1,39 @@
+{
+    "release": {
+      "branch": "master",
+      "plugins": [
+        ["@semantic-release/commit-analyzer", {
+          "preset": "eslint",
+          "releaseRules": [
+            {"tag": "major ", "release": "major"},
+            {"tag": "minor", "release": "minor"},
+            {"tag": "patch", "release": "patch"}
+          ]
+        }],
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "README.md",
+                "changelogTitle": "# Semantic Versioning Changelog"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "README.md"
+                ]
+            }
+        ],
+        ["@semantic-release/github", {
+          "assets": [
+            {"path": "README.md", "label": "README.md"}
+          ]
+        }]
+      ]
+    },
+    "devDependencies": {
+      "semantic-release": "^15.0.0"
+    }
+  }
