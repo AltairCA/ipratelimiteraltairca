@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IpRateLimiter.NET.AltairCA.Models
+namespace IpRateLimiter.AspNetCore.AltairCA.Models
 {
     public class IpRateLimitServiceResponse
     {

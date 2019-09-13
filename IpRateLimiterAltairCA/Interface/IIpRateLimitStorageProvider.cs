@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace IpRateLimiter.NET.AltairCA.Interface
+namespace IpRateLimiter.AspNetCore.AltairCA.Interface
 {
     public interface IIpRateLimitStorageProvider
     {

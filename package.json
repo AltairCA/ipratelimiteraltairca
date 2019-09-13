@@ -14,7 +14,7 @@
         [
             "@semantic-release/changelog",
             {
-                "changelogFile": "README.md",
+                "changelogFile": "ChangeLog.md",
                 "changelogTitle": "# Semantic Versioning Changelog"
             }
         ],
@@ -28,7 +28,7 @@
         ],
         ["@semantic-release/github", {
           "assets": [
-            {"path": "README.md", "label": "README.md"}
+            {"path": "IpRateLimiterAltairCA/bin/Debug", "label": "Build Output"}
           ]
         }]
       ]

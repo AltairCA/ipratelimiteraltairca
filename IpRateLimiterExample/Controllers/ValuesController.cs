@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IpRateLimiter.NET.AltairCA;
+using IpRateLimiter.AspNetCore.AltairCA;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IpRateLimiterExample.Controllers

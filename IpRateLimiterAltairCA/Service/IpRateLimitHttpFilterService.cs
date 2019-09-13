@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using IpRateLimiter.NET.AltairCA.Helpers;
-using IpRateLimiter.NET.AltairCA.Interface;
-using IpRateLimiter.NET.AltairCA.Models;
+using IpRateLimiter.AspNetCore.AltairCA.Helpers;
+using IpRateLimiter.AspNetCore.AltairCA.Interface;
+using IpRateLimiter.AspNetCore.AltairCA.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace IpRateLimiter.NET.AltairCA.Service
+namespace IpRateLimiter.AspNetCore.AltairCA.Service
 {
     internal class IpRateLimitHttpFilterService: IIpRateLimitHttpFilterService
     {

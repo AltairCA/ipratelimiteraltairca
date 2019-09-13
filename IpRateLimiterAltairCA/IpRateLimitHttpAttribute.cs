@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IpRateLimiter.NET.AltairCA.Interface;
-using IpRateLimiter.NET.AltairCA.Models;
+using IpRateLimiter.AspNetCore.AltairCA.Interface;
+using IpRateLimiter.AspNetCore.AltairCA.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IpRateLimiter.NET.AltairCA
+namespace IpRateLimiter.AspNetCore.AltairCA
 {
     public class IpRateLimitHttpAttribute: Attribute , IAsyncActionFilter
     {

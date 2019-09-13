@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace IpRateLimiter.NET.AltairCA.Helpers
+namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     internal static class CommonUtils
     {

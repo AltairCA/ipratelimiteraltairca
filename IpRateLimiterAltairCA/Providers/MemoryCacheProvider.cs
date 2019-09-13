@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IpRateLimiter.NET.AltairCA.Interface;
+using IpRateLimiter.AspNetCore.AltairCA.Interface;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace IpRateLimiter.NET.AltairCA.Providers
+namespace IpRateLimiter.AspNetCore.AltairCA.Providers
 {
     public class MemoryCacheProvider: IIpRateLimitStorageProvider
     {

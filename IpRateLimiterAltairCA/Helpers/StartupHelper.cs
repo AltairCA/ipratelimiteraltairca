@@ -1,10 +1,10 @@
 ﻿using System;
-using IpRateLimiter.NET.AltairCA.Interface;
-using IpRateLimiter.NET.AltairCA.Models;
-using IpRateLimiter.NET.AltairCA.Service;
+using IpRateLimiter.AspNetCore.AltairCA.Interface;
+using IpRateLimiter.AspNetCore.AltairCA.Models;
+using IpRateLimiter.AspNetCore.AltairCA.Service;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IpRateLimiter.NET.AltairCA.Helpers
+namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     public static class StartupHelper
     {
