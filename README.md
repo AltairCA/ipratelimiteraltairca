@@ -60,6 +60,7 @@ public class IpRateLimitOptions
 
     }
 ```
+`{0}` is max limit, `{1}` is period in seconds, `{2}` when the quota get resets in seconds
 
 
 ### Using it in a controller
