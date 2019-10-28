@@ -3,7 +3,7 @@
       "branch": "master",
       "plugins": [
         ["@semantic-release/exec", {
-          "publishCmd": "cd IpRateLimiterAltairCA && dotnet build && dotnet pack -p:PackageVersion=${nextRelease.version}"
+          "publishCmd": "cd IpRateLimiterAltairCA && dotnet build && dotnet pack -p:PackageVersion=${nextRelease.version} && cd IpRateLimiterAltairCA/bin/Debug && zip -r release.zip ."
         }],
         ["@semantic-release/commit-analyzer", {
           "preset": "eslint",
@@ -31,7 +31,7 @@
         ],
         ["@semantic-release/github", {
           "assets": [
-            {"path": "IpRateLimiterAltairCA/bin/Debug", "label": "Build Output"}
+            {"path": "release.zip", "label": "Build Output"}
           ]
         }]
       ]
