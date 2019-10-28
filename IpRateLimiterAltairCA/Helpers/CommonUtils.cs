@@ -12,6 +12,12 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     internal static class CommonUtils
     {
+        /// <summary>
+        /// Get Client Ip using HttpContextAccessor
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         public static string GetClientIP(IpRateLimitOptions settings, IHttpContextAccessor httpContext)
         {
             string ip = string.Empty;
