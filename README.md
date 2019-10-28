@@ -62,7 +62,7 @@ public class IpRateLimitOptions
 ```
 
 
-###Using it in a controller
+### Using it in a controller
 
 ```c#
     [Route("api/[controller]")]
