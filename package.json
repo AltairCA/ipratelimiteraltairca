@@ -31,7 +31,7 @@
         ],
         ["@semantic-release/github", {
           "assets": [
-            {"path": "${PROJECT_FOLDER}/bin/Debug/release.zip", "label": "Build Output"}
+            {"path": "**/bin/Debug/release.zip", "label": "Build Output"}
           ]
         }]
       ]
