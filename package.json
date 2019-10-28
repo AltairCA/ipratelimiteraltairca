@@ -3,7 +3,7 @@
       "branch": "master",
       "plugins": [
         ["@semantic-release/exec", {
-          "publishCmd": "export NEXT_VERSION=${nextRelease.version} && export PROJECT_FOLDER=IpRateLimiterAltairCA && export BINARY_NAME=IpRateLimiter.AspNetCore.AltairCA && chmod +x Release.sh && ./Release.sh"
+          "publishCmd": "chmod +x Release.sh && ./Release.sh ${nextRelease.version}"
         }],
         ["@semantic-release/commit-analyzer", {
           "preset": "eslint",
