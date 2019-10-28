@@ -27,20 +27,6 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             _settings = settings.Value;
         }
 
-        private string GetClientIP()
-        {
-            string ip = string.Empty;
-            if (string.IsNullOrWhiteSpace(_settings.RealIpHeader))
-            {
-                ip = _httpContext.HttpContext.Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            }
-            else
-            {
-                ip = _httpContext.HttpContext.Request.Headers.FirstOrDefault(x => x.Key == _settings.RealIpHeader).Value;
-            }
-            return ip;
-        }
-
         public string GetPath()
         {
             var rd = _httpContext.HttpContext.GetRouteData();
@@ -55,7 +41,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
         }
         public async Task<Tuple<bool, IpRateLimitServiceResponse>> Validate(TimeSpan span, int limit, string groupKey)
         {
-            string clientIp = GetClientIP();
+            string clientIp = CommonUtils.GetClientIP(_settings,_httpContext);
             if (string.IsNullOrWhiteSpace(clientIp))
             {
                 return new Tuple<bool, IpRateLimitServiceResponse>(true,null);
@@ -107,15 +93,16 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             if (model.Entries.Any())
             {
                 firstDate = model.Entries.First();
+                firstDate = firstDate.Add(span);
             }
             if (model.Entries.Count >= limit)
             {
                
-                return new Tuple<bool, IpRateLimitServiceResponse>(false,new IpRateLimitServiceResponse{ResetIn = firstDate.Add(span),MaxLimit = limit,Period = span.TotalSeconds });
+                return new Tuple<bool, IpRateLimitServiceResponse>(false,new IpRateLimitServiceResponse{ResetIn = firstDate,MaxLimit = limit,Period = span.TotalSeconds });
             }
             model.Entries.Add(now);
             await _provider.Set(key, model,span);
-            return new Tuple<bool, IpRateLimitServiceResponse>(true, new IpRateLimitServiceResponse{AvaliableLimit = limit  - model.Entries.Count, ResetIn = firstDate.Add(span), Period = span.TotalSeconds });
+            return new Tuple<bool, IpRateLimitServiceResponse>(true, new IpRateLimitServiceResponse{AvaliableLimit = limit  - model.Entries.Count, ResetIn = firstDate, Period = span.TotalSeconds });
         }
 
         public void SetHeaderAndBodyIfLimitReached(ActionExecutingContext context, IpRateLimitServiceResponse response)

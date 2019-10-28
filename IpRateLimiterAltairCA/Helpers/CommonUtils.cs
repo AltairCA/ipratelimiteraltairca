@@ -5,11 +5,26 @@ using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using IpRateLimiter.AspNetCore.AltairCA.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     internal static class CommonUtils
     {
+        public static string GetClientIP(IpRateLimitOptions settings, IHttpContextAccessor httpContext)
+        {
+            string ip = string.Empty;
+            if (string.IsNullOrWhiteSpace(settings.RealIpHeader))
+            {
+                ip = httpContext.HttpContext.Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            }
+            else
+            {
+                ip = httpContext.HttpContext.Request.Headers.FirstOrDefault(x => x.Key == settings.RealIpHeader).Value;
+            }
+            return ip;
+        }
         public static string GetKey(string clientIp, string path,string timeSpan)
         {
             using (var algorithm = SHA512.Create()) //or MD5 SHA256 etc.
