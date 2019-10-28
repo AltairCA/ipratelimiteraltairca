@@ -3,7 +3,6 @@
       "branch": "master",
       "plugins": [
         ["@semantic-release/exec", {
-          "verifyConditionsCmd": "./verify.sh",
           "publishCmd": "cd IpRateLimiterAltairCA && dotnet build && dotnet pack -p:PackageVersion=${nextRelease.version}"
         }],
         ["@semantic-release/commit-analyzer", {
