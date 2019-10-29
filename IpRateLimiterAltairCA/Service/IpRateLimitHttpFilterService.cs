@@ -27,13 +27,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             _settings = settings.Value;
         }
 
-        public string GetPath()
-        {
-            var rd = _httpContext.HttpContext.GetRouteData();
-            string currentController = rd.Values["controller"].ToString();
-            string currentAction = rd.Values["action"].ToString();
-            return string.Concat(currentController,"/", currentAction);
-        }
+       
 
         public async Task<Tuple<bool, IpRateLimitServiceResponse>> Validate()
         {
@@ -66,7 +60,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             }
 
             DateTime now = DateTime.UtcNow;
-            string path = GetPath();
+            string path = CommonUtils.GetPath(_httpContext);
             string key = string.Empty;
             if (string.IsNullOrWhiteSpace(groupKey))
             {

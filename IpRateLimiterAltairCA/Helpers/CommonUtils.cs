@@ -7,11 +7,24 @@ using System.Security.Cryptography;
 using System.Text;
 using IpRateLimiter.AspNetCore.AltairCA.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     internal static class CommonUtils
     {
+        /// <summary>
+        /// Get Path using httpContext
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static string GetPath(IHttpContextAccessor httpContext)
+        {
+            var rd = httpContext.HttpContext.GetRouteData();
+            string currentController = rd.Values["controller"].ToString();
+            string currentAction = rd.Values["action"].ToString();
+            return string.Concat(currentController, "/", currentAction);
+        }
         /// <summary>
         /// Get Client Ip using HttpContextAccessor
         /// </summary>
