@@ -58,7 +58,7 @@ namespace IpRateLimiterExample.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete()
         {
-            await _ipRateLimitHttpService.ClearLimit("GET:/api/values");
+            await _ipRateLimitHttpService.ClearLimit("GET:Values/Get");
             await _ipRateLimitHttpService.ClearLimit("group1");
             return Ok();
         }

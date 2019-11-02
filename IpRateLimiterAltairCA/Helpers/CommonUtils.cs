@@ -20,7 +20,10 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
         /// <returns></returns>
         public static string GetPath(IHttpContextAccessor httpContext)
         {
-            string path = httpContext.HttpContext.Request.Path;
+            var rd = httpContext.HttpContext.GetRouteData();
+            string currentController = rd.Values["controller"].ToString();
+            string currentAction = rd.Values["action"].ToString();
+            string path = string.Concat(currentController, "/", currentAction);
             string method = httpContext.HttpContext.Request.Method;
             return string.Concat($"{method}:",path);
         }
