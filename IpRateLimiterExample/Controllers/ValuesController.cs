@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using IpRateLimiter.AspNetCore.AltairCA;
 using IpRateLimiter.AspNetCore.AltairCA.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace IpRateLimiterExample.Controllers
 {
@@ -14,10 +16,11 @@ namespace IpRateLimiterExample.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly IIpRateLimitHttpService _ipRateLimitHttpService;
-
-        public ValuesController(IIpRateLimitHttpService ipRateLimitHttpService)
+        private readonly IMemoryCache _memoryCache;
+        public ValuesController(IIpRateLimitHttpService ipRateLimitHttpService, IMemoryCache memoryCache)
         {
             _ipRateLimitHttpService = ipRateLimitHttpService;
+            _memoryCache = memoryCache;
         }
 
         // GET api/values
@@ -52,10 +55,12 @@ namespace IpRateLimiterExample.Controllers
         {
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete()
         {
+            await _ipRateLimitHttpService.ClearLimit("GET:/api/values");
+            await _ipRateLimitHttpService.ClearLimit("group1");
+            return Ok();
         }
     }
 }

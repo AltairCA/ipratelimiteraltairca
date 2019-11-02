@@ -29,14 +29,14 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             string clientIp = CommonUtils.GetClientIP(_settings, _httpContext);
             string path = CommonUtils.GetPath(_httpContext);
             string key = CommonUtils.GetKey(clientIp, path);
-            key = string.Concat(_settings.CachePrefix, key);
+            
             await _provider.RemoveAsync(key);
         }
 
         public async Task ClearLimit([Required(AllowEmptyStrings = false)] string groupKey)
         {
-            string key = string.Concat(_settings.CachePrefix, groupKey);
-            await _provider.RemoveAsync(key);
+            string clientIp = CommonUtils.GetClientIP(_settings, _httpContext);
+            await _provider.RemoveAsync(CommonUtils.GetKey(clientIp, groupKey));
         }
     }
 }

@@ -69,9 +69,8 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             }
             else
             {
-                key = groupKey;
+                key = CommonUtils.GetKey(clientIp, groupKey);
             }
-            key = string.Concat(_settings.CachePrefix, key);
             StoreModel model = await _provider.GetAsync<StoreModel>(key);
             if (model == null)
             {
