@@ -64,7 +64,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             string key = string.Empty;
             if (string.IsNullOrWhiteSpace(groupKey))
             {
-                key = CommonUtils.GetKey(clientIp, path, span.TotalSeconds.ToString());
+                key = CommonUtils.GetKey(clientIp, path);
                 
             }
             else
@@ -72,7 +72,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
                 key = groupKey;
             }
             key = string.Concat(_settings.CachePrefix, key);
-            StoreModel model = await _provider.Get<StoreModel>(key);
+            StoreModel model = await _provider.GetAsync<StoreModel>(key);
             if (model == null)
             {
                 model = new StoreModel
@@ -95,7 +95,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
                 return new Tuple<bool, IpRateLimitServiceResponse>(false,new IpRateLimitServiceResponse{ResetIn = firstDate,MaxLimit = limit,Period = span.TotalSeconds });
             }
             model.Entries.Add(now);
-            await _provider.Set(key, model,span);
+            await _provider.SetAsync(key, model,span);
             return new Tuple<bool, IpRateLimitServiceResponse>(true, new IpRateLimitServiceResponse{AvaliableLimit = limit  - model.Entries.Count, ResetIn = firstDate, Period = span.TotalSeconds });
         }
 

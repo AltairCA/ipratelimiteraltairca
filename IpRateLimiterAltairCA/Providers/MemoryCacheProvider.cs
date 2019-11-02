@@ -14,7 +14,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Providers
             _cache = cache;
         }
         
-        public async Task<T> Get<T>(string key)
+        public async Task<T> GetAsync<T>(string key)
         {
             
             T model = default;
@@ -24,7 +24,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Providers
             
         }
 
-        public async Task Set(string key, object obj,TimeSpan span)
+        public async Task SetAsync(string key, object obj, TimeSpan span)
         {
             await Task.Run(() =>
             {
@@ -32,10 +32,17 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Providers
 
             });
         }
-        public async Task Set(string key, object obj)
+        public async Task SetAsync(string key, object obj)
         {
             await Task.Run(() => { _cache.Set(key, obj); });
         }
 
+        public async Task RemoveAsync(string key)
+        {
+            await Task.Run(() =>
+            {
+                _cache.Remove(key);
+            });
+        }
     }
 }

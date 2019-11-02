@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IpRateLimiter.AspNetCore.AltairCA;
+using IpRateLimiter.AspNetCore.AltairCA.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IpRateLimiterExample.Controllers
@@ -12,6 +13,13 @@ namespace IpRateLimiterExample.Controllers
     [IpRateLimitHttp]
     public class ValuesController : ControllerBase
     {
+        private readonly IIpRateLimitHttpService _ipRateLimitHttpService;
+
+        public ValuesController(IIpRateLimitHttpService ipRateLimitHttpService)
+        {
+            _ipRateLimitHttpService = ipRateLimitHttpService;
+        }
+
         // GET api/values
         [HttpGet]
         
@@ -19,7 +27,7 @@ namespace IpRateLimiterExample.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        [IpRateLimitHttp(10*60,2,"asd" )]
+        [IpRateLimitHttp(10*60,2,"group1" )]
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
@@ -27,6 +35,11 @@ namespace IpRateLimiterExample.Controllers
             return "value";
         }
 
+        [HttpGet("clearlimit")]
+        public void RemoveLimit()
+        {
+            _ipRateLimitHttpService.ClearLimit("group1");
+        }
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)

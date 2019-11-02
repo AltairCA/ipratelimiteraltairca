@@ -20,10 +20,9 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
         /// <returns></returns>
         public static string GetPath(IHttpContextAccessor httpContext)
         {
-            var rd = httpContext.HttpContext.GetRouteData();
-            string currentController = rd.Values["controller"].ToString();
-            string currentAction = rd.Values["action"].ToString();
-            return string.Concat(currentController, "/", currentAction);
+            string path = httpContext.HttpContext.Request.Path;
+            string method = httpContext.HttpContext.Request.Method;
+            return string.Concat($"{method}:",path);
         }
         /// <summary>
         /// Get Client Ip using HttpContextAccessor
@@ -44,11 +43,11 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
             }
             return ip;
         }
-        public static string GetKey(string clientIp, string path,string timeSpan)
+        public static string GetKey(string clientIp, string path)
         {
             using (var algorithm = SHA512.Create()) //or MD5 SHA256 etc.
             {
-                var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(clientIp,path, timeSpan)));
+                var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(clientIp,path)));
 
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
