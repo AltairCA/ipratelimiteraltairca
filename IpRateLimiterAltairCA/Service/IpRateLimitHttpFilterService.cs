@@ -27,13 +27,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             _settings = settings.Value;
         }
 
-        public string GetPath()
-        {
-            var rd = _httpContext.HttpContext.GetRouteData();
-            string currentController = rd.Values["controller"].ToString();
-            string currentAction = rd.Values["action"].ToString();
-            return string.Concat(currentController,"/", currentAction);
-        }
+       
 
         public async Task<Tuple<bool, IpRateLimitServiceResponse>> Validate()
         {
@@ -66,19 +60,18 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
             }
 
             DateTime now = DateTime.UtcNow;
-            string path = GetPath();
+            string path = CommonUtils.GetPath(_httpContext);
             string key = string.Empty;
             if (string.IsNullOrWhiteSpace(groupKey))
             {
-                key = CommonUtils.GetKey(clientIp, path, span.TotalSeconds.ToString());
+                key = CommonUtils.GetKey(clientIp, path);
                 
             }
             else
             {
-                key = groupKey;
+                key = CommonUtils.GetKey(clientIp, groupKey);
             }
-            key = string.Concat(_settings.CachePrefix, key);
-            StoreModel model = await _provider.Get<StoreModel>(key);
+            StoreModel model = await _provider.GetAsync<StoreModel>(key);
             if (model == null)
             {
                 model = new StoreModel
@@ -101,7 +94,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
                 return new Tuple<bool, IpRateLimitServiceResponse>(false,new IpRateLimitServiceResponse{ResetIn = firstDate,MaxLimit = limit,Period = span.TotalSeconds });
             }
             model.Entries.Add(now);
-            await _provider.Set(key, model,span);
+            await _provider.SetAsync(key, model,span);
             return new Tuple<bool, IpRateLimitServiceResponse>(true, new IpRateLimitServiceResponse{AvaliableLimit = limit  - model.Entries.Count, ResetIn = firstDate, Period = span.TotalSeconds });
         }
 

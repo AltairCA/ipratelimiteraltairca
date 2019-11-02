@@ -12,6 +12,7 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
         {
             service.Configure(options);
             service.AddScoped<IIpRateLimitHttpFilterService, IpRateLimitHttpFilterService>();
+            service.AddScoped<IIpRateLimitHttpService, IpRateLimitHttpService>();
             return service;
         }
     }

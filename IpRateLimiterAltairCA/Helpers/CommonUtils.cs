@@ -7,11 +7,26 @@ using System.Security.Cryptography;
 using System.Text;
 using IpRateLimiter.AspNetCore.AltairCA.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
 {
     internal static class CommonUtils
     {
+        /// <summary>
+        /// Get Path using httpContext
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static string GetPath(IHttpContextAccessor httpContext)
+        {
+            var rd = httpContext.HttpContext.GetRouteData();
+            string currentController = rd.Values["controller"].ToString();
+            string currentAction = rd.Values["action"].ToString();
+            string path = string.Concat(currentController, "/", currentAction);
+            string method = httpContext.HttpContext.Request.Method;
+            return string.Concat($"{method}:",path);
+        }
         /// <summary>
         /// Get Client Ip using HttpContextAccessor
         /// </summary>
@@ -31,11 +46,11 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Helpers
             }
             return ip;
         }
-        public static string GetKey(string clientIp, string path,string timeSpan)
+        public static string GetKey(string clientIp, string path)
         {
             using (var algorithm = SHA512.Create()) //or MD5 SHA256 etc.
             {
-                var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(clientIp,path, timeSpan)));
+                var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(clientIp,path)));
 
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
