@@ -136,9 +136,8 @@ namespace IpRateLimiter.AspNetCore.AltairCA.Service
                 context.Response.Headers.Remove("x-rate-limit-reset");
                 context.Response.Headers.Add("x-rate-limit-limit", response.Period.ToString());
                 context.Response.Headers.Add("x-rate-limit-remaining", response.AvaliableLimit.ToString());
-                context.Response.Headers.Add("x-rate-limit-reset", response.ResetIn.ToString());
+                context.Response.Headers.Add("x-rate-limit-reset", response.ResetIn.ToString("yyyy-MM-dd HH:mm:ss \"GMT\""));
             }
-            
         }
 
         private bool ShouldWriteContent(HttpContext context, IpRateLimitServiceResponse response)
