@@ -94,3 +94,5 @@ public class IpRateLimitOptions
 ```
 
 You can apply the filter attribute at the top of the controller class. It will apply the rule for all of the endpoints that defined in the controller or you can put the attribute at the endpoint level. If you put the attribute at the class level and the endpoint level it will work as a `AND` operator.
+
+Just added a comment here !
